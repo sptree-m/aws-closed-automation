@@ -1,0 +1,11 @@
+# Runtime evidence and local settings
+.env
+evidence/
+artifacts/
+*.tfstate
+*.tfstate.*
+.terraform/
+.terraform.lock.hcl
+__pycache__/
+*.pyc
+.aws/
