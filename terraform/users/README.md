@@ -70,3 +70,10 @@ The Ubuntu host must have:
 - an instance role allowed to mount the EFS filesystem with IAM authorization
 
 The host also needs network access to the EFS mount target (TCP 2049) and SSM VPC endpoints.
+
+
+## Bedrock identity note
+
+`bedrock_tag` is currently metadata only. It does **not** create a cryptographically isolated AWS identity per user.
+
+Production per-user Bedrock attribution should be implemented separately using a credential broker or another mechanism that issues user-scoped temporary AWS credentials and blocks direct container access to EC2 IMDS.
