@@ -1,4 +1,4 @@
-data "aws_caller_identity" "current" {}
+data "aws_caller_identity" "current" {}\n\ndata "aws_iam_role" "instance" {\n  name = var.instance_profile_role_name\n}
 
 variable "instance_profile_role_name" {
   description = "IAM role name attached to the shared Ubuntu EC2 instance."
@@ -85,6 +85,6 @@ data "aws_iam_policy_document" "instance_assume_users" {
 
 resource "aws_iam_role_policy" "instance_assume_users" {
   name   = "claude-assume-user-roles"
-  role   = var.instance_profile_role_name
+  role   = data.aws_iam_role.instance.name
   policy = data.aws_iam_policy_document.instance_assume_users.json
 }
