@@ -13,6 +13,7 @@ OUT="evidence/$STAMP"
 mkdir -p "$OUT/raw"
 export OUT AWS_DEFAULT_REGION="$AWS_REGION"
 bash scripts/collect_evidence.sh
+if [[ -n "${USER01:-}" ]]; then bash scripts/collect_identity_evidence.sh; fi
 python3 scripts/generate_report.py "$OUT"
 if [[ -n "${EVIDENCE_BUCKET:-}" ]]; then bash scripts/upload_evidence.sh "$OUT"; fi
 echo "Evidence complete: $OUT"
