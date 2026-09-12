@@ -1,0 +1,14 @@
+users:
+  - username: user01
+    uid: 10001
+    gid: 10001
+    enabled: true
+    display_name: User 01
+    bedrock_tag: user01
+
+  - username: user02
+    uid: 10002
+    gid: 10002
+    enabled: true
+    display_name: User 02
+    bedrock_tag: user02
