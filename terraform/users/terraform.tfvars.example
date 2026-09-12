@@ -1,6 +1,11 @@
-aws_region         = "ap-northeast-1"
-efs_file_system_id = "fs-xxxxxxxx"
-instance_id        = "i-xxxxxxxx"
+aws_region                = "ap-northeast-1"
+efs_file_system_id        = "fs-xxxxxxxx"
+instance_id               = "i-xxxxxxxx"
+instance_profile_role_name = "claude-shared-ec2-role"
+
+bedrock_model_arns = [
+  "arn:aws:bedrock:ap-northeast-1::foundation-model/REPLACE_ME"
+]
 
 # users_file defaults to ../../config/users.yaml
 # local_container_root defaults to /var/lib/claude-users
