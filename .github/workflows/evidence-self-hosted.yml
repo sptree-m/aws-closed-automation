@@ -1,0 +1,37 @@
+name: Closed Environment Evidence
+
+on:
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  evidence:
+    runs-on: [self-hosted, linux, closed-env]
+    timeout-minutes: 30
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Collect and report evidence
+        shell: bash
+        env:
+          AWS_REGION: ${{ vars.AWS_REGION }}
+          SECURE_VPC_ID: ${{ vars.SECURE_VPC_ID }}
+          CLAUDE_INSTANCE_ID: ${{ vars.CLAUDE_INSTANCE_ID }}
+          EFS_FILE_SYSTEM_ID: ${{ vars.EFS_FILE_SYSTEM_ID }}
+          BEDROCK_VPCE_ID: ${{ vars.BEDROCK_VPCE_ID }}
+          USER01: ${{ vars.USER01 }}
+          USER02: ${{ vars.USER02 }}
+          EVIDENCE_BUCKET: ${{ vars.EVIDENCE_BUCKET }}
+          EVIDENCE_PREFIX: ${{ vars.EVIDENCE_PREFIX }}
+          EVIDENCE_KMS_KEY_ARN: ${{ vars.EVIDENCE_KMS_KEY_ARN }}
+        run: bash scripts/run_all.sh
+
+      - name: Upload short-lived workflow artifact
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: closed-env-evidence
+          path: evidence/
+          retention-days: 7
